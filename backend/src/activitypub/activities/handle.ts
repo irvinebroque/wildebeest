@@ -48,7 +48,7 @@ export function makeGetObjectAsId(activity: Activity): Function {
 		try {
 			return new URL(url)
 		} catch (err) {
-			console.warn('invalid URL: ' + url)
+			console.error('invalid URL: ' + url)
 			throw err
 		}
 	}
@@ -92,7 +92,6 @@ export async function handle(domain: string, activity: Activity, db: D1Database,
 	const getObjectAsId = makeGetObjectAsId(activity)
 	const getActorAsId = makeGetActorAsId(activity)
 
-	console.log(activity)
 	switch (activity.type) {
 		case 'Update': {
 			requireComplexObject()
@@ -318,7 +317,7 @@ export async function handle(domain: string, activity: Activity, db: D1Database,
 		}
 
 		default:
-			console.warn(`Unsupported activity: ${activity.type}`)
+			console.error(`Unsupported activity: ${activity.type}`)
 	}
 }
 
